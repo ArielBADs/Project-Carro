@@ -48,7 +48,7 @@ void loop() {
       rotateRight();
       delay(200);
       forward();
-      delay(500);
+      delay(1000);
     }
   }else if(linhaBranca()){
     turnLeft();
