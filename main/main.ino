@@ -1,5 +1,3 @@
-#include <Ultrasonic.h>
-
 /**********************************************************
 * UNIVERSIDADE FEDERAL DE PERNAMBUCO - UFPE
 * CENTRO DE INFORMARICA - CIN
@@ -8,8 +6,6 @@
 
 //pino do sensor
 int IR = 2; 
-int teste = 0;
-int rodou = 0;
 //Pinagem da placa
 int LF = 7;
 int LB = 6;
@@ -20,6 +16,9 @@ int RV = 3;
 // Pino do sensor d
 int ultrassonic_echo = 10;
 int ultrassonic_trig = 8;
+
+// Controlar tempo
+const unsigned long duracaoManobra = 1500;
 
 void setup() {
   pinMode(LF, OUTPUT);
@@ -35,21 +34,26 @@ void setup() {
 }
 
 void loop() {
-
-  if(ultrassonicRead() < 10){
-    Stop();
-    setSpeed(30);
+  setSpeed(60);
+   if (ultrassonicRead() < 6) {
+    stop();
+    delay(1000);
     rotateLeft();
+    delay(350);
     forward();
-    delay(500);
-    rotateRight();
+    delay(800);
+    unsigned long tempoInicioManobra = millis();
+    if (millis() - tempoInicioManobra >= duracaoManobra) {
+      tempoInicioManobra = millis();
+      rotateRight();
+      delay(200);
+      forward();
+      delay(500);
+    }
+  }else if(linhaBranca()){
+    turnLeft();
   }
-  else if(readIR()){
-    turnRight(60);
-    StopLeft();
-  }
-  else if(!readIR()){
-    turnLeft(60);
-    StopRight();
+  else if(linhaPreta()){
+    turnRight();
   }
 }
