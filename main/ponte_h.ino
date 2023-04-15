@@ -44,15 +44,13 @@ void backward(){
   driveMotor('R','B');
 }
 
-void turnRight(int turnSpeed){
-  analogWrite(LV, turnSpeed);
+void turnRight(){
+  stopRight();
   driveMotor('L','F');
-  driveMotor('R','F');
 }
 
-void turnLeft(int turnSpeed){
-  analogWrite(RV, turnSpeed);
-  driveMotor('L','F');
+void turnLeft(){
+  stopLeft();
   driveMotor('R','F');
 }
 
@@ -62,20 +60,19 @@ void rotateLeft(){
 }
 
 void rotateRight(){
-  driveMotor('L','B');
-  driveMotor('R','F');
+  driveMotor('R','B');
+  driveMotor('L','F');
 }
 
-void StopLeft(){
+void stopLeft(){
   driveMotor('L','S');
 }
 
-void StopRight(){
+void stopRight(){
   driveMotor('R','S');
 }
 
-void Stop(){
+void stop(){
   driveMotor('L','S');
   driveMotor('R','S');
 }
-  
