@@ -1,5 +1,9 @@
-bool readIR(){
-  return !digitalRead(IR);
+bool linhaBranca(){
+  return digitalRead(IR) == HIGH;
+}
+
+bool linhaPreta(){
+  return digitalRead(IR) == LOW;
 }
 
 long ultrassonicRead(){
@@ -12,6 +16,7 @@ long ultrassonicRead(){
   digitalWrite(ultrassonic_trig, LOW);
   duracao = pulseIn(ultrassonic_echo, HIGH);
   distancia = duracao/58;  
+  Serial.println(distancia);
   
   return distancia;
-} 
+}
